@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form Builder</title>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}">
+</head>
+<body>
+<div class="container">
+    <form action="#" th:action="@{/}" th:object="${form}" method="post">
+        <input type="hidden" th:value="*{id}" id="id" name="id"/>
+        <div th:each="formField,rowStat : ${form.formFields}">
+            <p>
+                <span th:text="${formField.fieldName}"></span>
+            <div th:if="${formField.type.toString()} eq 'OPTION'">
+                <select th:name="${formField.id}">
+                    <option value=""> -- </option>
+                    <option th:each="option : ${formField.getFormOptions()}"
+                            th:value="${option}"
+                            th:utext="${option}"/>
+                </select>
+            </div>
+            <div th:if="${formField.type.toString()} eq 'MULTI_OPTION'">
+                <select th:name="${formField.id}" multiple>
+                    <option th:each="option : ${formField.getFormOptions()}"
+                            th:value="${option}"
+                            th:utext="${option}"/>
+                </select>
+            </div>
+            <div th:if="${formField.type.toString()} eq 'TEXT'">
+                <!-- print object is new and active -->
+                <input type="text" th:name="${formField.id}"  />
+            </div>
+
+            </p>
+        </div>
+        <p>
+        <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+        </p>
+    </form>
+</div>
+
+</body>
+</html>
