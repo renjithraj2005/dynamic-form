@@ -4,6 +4,7 @@ import com.demo.form.model.Point;
 import com.demo.form.model.Node;
 import com.demo.form.model.enums.FieldType;
 import com.demo.form.repository.NodeRepository;
+import com.demo.form.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,9 @@ public class FormApplication implements CommandLineRunner {
 
 	@Autowired
 	NodeRepository nodeRepository;
+
+	@Autowired
+	PointRepository pointRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FormApplication.class, args);
@@ -46,8 +50,8 @@ public class FormApplication implements CommandLineRunner {
 		node.setPoint(point);
 		node = nodeRepository.save(node);
 
-
-		nodeRepository.delete(node);
+		pointRepository.delete(point);
+//		nodeRepository.delete(node);
 
 
 	}
