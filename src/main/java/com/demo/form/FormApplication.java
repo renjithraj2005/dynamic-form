@@ -48,6 +48,7 @@ public class FormApplication implements CommandLineRunner {
 		Point point = new Point("Point1");
 		Node node =  new Node("name", FieldType.TEXT,"what is your name?");
 		node.setPoint(point);
+		point.setNode(node);
 		node = nodeRepository.save(node);
 
 		pointRepository.delete(node.getPoint());

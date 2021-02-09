@@ -41,4 +41,9 @@ public class Point extends BaseModel{
     public void setNode(Node node) {
         this.node = node;
     }
+
+    @PreRemove
+    private void preRemove() {
+        node.setPoint(null);
+    }
 }
