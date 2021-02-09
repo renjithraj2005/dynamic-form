@@ -12,16 +12,18 @@ public class Point extends BaseModel{
     @Column(name = "name", nullable = false)
     private String name;
 
-    @JsonManagedReference
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "point", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Node> nodes;
+//    @JsonManagedReference
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "point", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Node> nodes;
+
+    @OneToOne(mappedBy = "point")
+    private Node node;
 
     public Point() {
     }
 
     public Point(String name) {
         this.name = name;
-        this.nodes = new HashSet<Node>();
     }
 
     public String getName() {
@@ -32,11 +34,11 @@ public class Point extends BaseModel{
         this.name = name;
     }
 
-    public Set<Node> getNodes() {
-        return nodes;
+    public Node getNode() {
+        return node;
     }
 
-    public void setNodes(Set<Node> nodes) {
-        this.nodes = nodes;
+    public void setNode(Node node) {
+        this.node = node;
     }
 }

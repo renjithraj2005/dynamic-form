@@ -19,9 +19,11 @@ public class Node extends BaseModel {
     private FieldType type;
 
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "point_id", nullable = false)
+//    @JsonBackReference
+//    @ManyToOne
+//    @JoinColumn(name = "point_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "point_id", referencedColumnName = "id")
     private Point point;
 
 

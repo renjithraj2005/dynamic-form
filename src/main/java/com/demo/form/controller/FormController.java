@@ -1,7 +1,7 @@
 package com.demo.form.controller;
 
 import com.demo.form.model.Point;
-import com.demo.form.repository.PointRepository;
+import com.demo.form.repository.NodeRepository;
 import com.demo.form.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,17 +19,17 @@ import java.util.Optional;
 public class FormController {
 
     @Autowired
-    PointRepository pointRepository;
+    NodeRepository nodeRepository;
 
     @Autowired
     FormService formService;
 
     @GetMapping("/")
     public String formController(Model model) {
-        Optional<Point> form = pointRepository.findById(1);
-        if(form.isPresent()){
-            model.addAttribute("form", form.get());
-        }
+//        Optional<Point> form = nodeRepository.findById(1);
+//        if(form.isPresent()){
+//            model.addAttribute("form", form.get());
+//        }
         return "form";
     }
 
@@ -38,14 +38,14 @@ public class FormController {
     public String process(@RequestBody MultiValueMap<String, String> postPayload, Model model) {
 
         List<String> id = postPayload.get("id");
-        if(!id.isEmpty()){
-            int formId = Integer.parseInt(id.get(0));
-            Optional<Point> form = pointRepository.findById(formId);
-            form.ifPresent(value -> model.addAttribute("form", value));
-            postPayload.remove("id");
-            System.out.println(postPayload);
-            formService.processForm(postPayload,formId);
-        }
+//        if(!id.isEmpty()){
+//            int formId = Integer.parseInt(id.get(0));
+//            Optional<Point> form = nodeRepository.findById(formId);
+//            form.ifPresent(value -> model.addAttribute("form", value));
+//            postPayload.remove("id");
+//            System.out.println(postPayload);
+//            formService.processForm(postPayload,formId);
+//        }
 
         model.addAttribute("success", true);
         return "form";
