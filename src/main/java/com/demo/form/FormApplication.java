@@ -31,9 +31,7 @@ public class FormApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		FormField stringField =  new FormField("name", FieldType.TEXT,"what is your name?");
 		FormField optionField = new FormField("gender",FieldType.OPTION,"what is your gender?");
-		optionField.setFormOptions(new ArrayList<>(List.of("Male","Female")));
 		FormField multiOptionField = new FormField("hobbies",FieldType.MULTI_OPTION,"Select your hobbies?");
-		multiOptionField.setFormOptions(new ArrayList<>(List.of("Swimming","Walking", "Cricket")));
 
 		Form form = new Form("userForm");
 		stringField.setForm(form);

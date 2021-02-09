@@ -21,8 +21,6 @@ public class FormField extends BaseModel {
     @Enumerated(EnumType.STRING)
     private FieldType type;
 
-    @Column(name = "form_options")
-    private String formOptions;
 
     @JsonBackReference
     @ManyToOne
@@ -53,15 +51,6 @@ public class FormField extends BaseModel {
 
     public void setType(FieldType type) {
         this.type = type;
-    }
-
-    public List<String> getFormOptions() {
-         return Arrays.asList(formOptions.split("\\s*,\\s*"));
-    }
-
-    public void setFormOptions(List<String> formOptions) {
-        this.formOptions = formOptions.stream()
-                .collect(Collectors.joining(","));
     }
 
     public Form getForm() {
