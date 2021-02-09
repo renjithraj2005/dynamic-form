@@ -1,18 +1,16 @@
 package com.demo.form;
 
-import com.demo.form.model.Form;
-import com.demo.form.model.FormField;
+import com.demo.form.model.Point;
+import com.demo.form.model.Node;
 import com.demo.form.model.enums.FieldType;
-import com.demo.form.repository.FormRepository;
+import com.demo.form.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +18,7 @@ import java.util.stream.Stream;
 public class FormApplication implements CommandLineRunner {
 
 	@Autowired
-	FormRepository formRepository;
+	PointRepository pointRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FormApplication.class, args);
@@ -29,17 +27,24 @@ public class FormApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		FormField stringField =  new FormField("name", FieldType.TEXT,"what is your name?");
-		FormField optionField = new FormField("gender",FieldType.OPTION,"what is your gender?");
-		FormField multiOptionField = new FormField("hobbies",FieldType.MULTI_OPTION,"Select your hobbies?");
+		Node node1 =  new Node("name", FieldType.TEXT,"what is your name?");
+		Node node2 = new Node("gender",FieldType.OPTION,"what is your gender?");
+		Node node3 = new Node("hobbies",FieldType.MULTI_OPTION,"Select your hobbies?");
 
-		Form form = new Form("userForm");
-		stringField.setForm(form);
-		optionField.setForm(form);
-		multiOptionField.setForm(form);
-		form.getFormFields().addAll(Stream.of(stringField, optionField,multiOptionField)
+		Point point = new Point("userForm");
+		node1.setPoint(point);
+		node2.setPoint(point);
+		node3.setPoint(point);
+		point.getNodes().addAll(Stream.of(node1, node2,node3)
 				.collect(Collectors.toCollection(HashSet::new)));
-		formRepository.save(form);
+
+
+
+		pointRepository.save(point);
+
+		Point form1 = pointRepository.getOne(1);
+		pointRepository.delete(form1);
+
 	}
 
 }

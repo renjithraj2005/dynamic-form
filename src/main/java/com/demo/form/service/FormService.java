@@ -2,7 +2,7 @@ package com.demo.form.service;
 
 import com.demo.form.dao.SurveyAnswerStatistics;
 import com.demo.form.model.FilledForm;
-import com.demo.form.model.FormField;
+import com.demo.form.model.Node;
 import com.demo.form.repository.FilledFormRepository;
 import com.demo.form.repository.FormFieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class FormService {
         List<SurveyAnswerStatistics> result = filledFormRepository.findMostAnsweredQuestion(formId);
         if(!result.isEmpty()){
 
-            Optional<FormField> formField = formFieldRepository.findById(Integer.parseInt(result.get(0).getField()));
+            Optional<Node> formField = formFieldRepository.findById(Integer.parseInt(result.get(0).getField()));
             if(formField.isPresent()){
                 System.out.println("Most Answered Question " + formField.get().getFieldLabel());
             }

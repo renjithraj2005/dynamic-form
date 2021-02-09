@@ -1,7 +1,7 @@
 package com.demo.form.controller;
 
-import com.demo.form.model.Form;
-import com.demo.form.repository.FormRepository;
+import com.demo.form.model.Point;
+import com.demo.form.repository.PointRepository;
 import com.demo.form.service.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,14 +19,14 @@ import java.util.Optional;
 public class FormController {
 
     @Autowired
-    FormRepository formRepository;
+    PointRepository pointRepository;
 
     @Autowired
     FormService formService;
 
     @GetMapping("/")
     public String formController(Model model) {
-        Optional<Form> form = formRepository.findById(1);
+        Optional<Point> form = pointRepository.findById(1);
         if(form.isPresent()){
             model.addAttribute("form", form.get());
         }
@@ -40,7 +40,7 @@ public class FormController {
         List<String> id = postPayload.get("id");
         if(!id.isEmpty()){
             int formId = Integer.parseInt(id.get(0));
-            Optional<Form> form = formRepository.findById(formId);
+            Optional<Point> form = pointRepository.findById(formId);
             form.ifPresent(value -> model.addAttribute("form", value));
             postPayload.remove("id");
             System.out.println(postPayload);

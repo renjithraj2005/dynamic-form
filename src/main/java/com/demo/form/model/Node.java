@@ -4,13 +4,10 @@ import com.demo.form.model.enums.FieldType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
-@Entity(name =  "FormField")
-@Table(name = "form_field")
-public class FormField extends BaseModel {
+@Entity(name =  "Node")
+@Table(name = "node")
+public class Node extends BaseModel {
 
     @Column(name = "field_name", nullable = false)
     private String fieldName;
@@ -24,14 +21,14 @@ public class FormField extends BaseModel {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "form_id", nullable = false)
-    private Form form;
+    @JoinColumn(name = "point_id", nullable = false)
+    private Point point;
 
 
-    public FormField() {
+    public Node() {
     }
 
-    public FormField(String fieldName, FieldType type, String fieldLabel) {
+    public Node(String fieldName, FieldType type, String fieldLabel) {
         this.fieldName = fieldName;
         this.fieldLabel = fieldLabel;
         this.type = type;
@@ -53,12 +50,12 @@ public class FormField extends BaseModel {
         this.type = type;
     }
 
-    public Form getForm() {
-        return form;
+    public Point getPoint() {
+        return point;
     }
 
-    public void setForm(Form form) {
-        this.form = form;
+    public void setPoint(Point point) {
+        this.point = point;
     }
 
     public String getFieldLabel() {
