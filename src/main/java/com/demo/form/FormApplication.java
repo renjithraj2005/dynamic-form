@@ -42,8 +42,8 @@ public class FormApplication implements CommandLineRunner {
 
 		pointRepository.save(point);
 
-		Point form1 = pointRepository.getOne(1);
-		pointRepository.delete(form1);
+//		Point form1 = pointRepository.getOne(1);
+//		pointRepository.delete(form1);
 
 	}
 
