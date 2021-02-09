@@ -50,7 +50,7 @@ public class FormApplication implements CommandLineRunner {
 		node.setPoint(point);
 		node = nodeRepository.save(node);
 
-		pointRepository.delete(point);
+		pointRepository.delete(node.getPoint());
 //		nodeRepository.delete(node);
 
 
